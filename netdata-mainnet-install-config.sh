@@ -53,8 +53,6 @@ cd ~/custom_netdata && rm -rf erd-dd-netdata-monitoring
 
 git clone https://github.com/disruptivedigital/erd-dd-netdata-monitoring.git
 
-sudo systemctl stop netdata && cd /var/cache/netdata && sudo rm -rf *
-
 sudo cp ~/custom_netdata/erd-dd-netdata-monitoring/elrond.chart.sh /usr/libexec/netdata/charts.d/
 sudo cp ~/custom_netdata/erd-dd-netdata-monitoring/charts.d.conf /usr/libexec/netdata/charts.d/
 
@@ -68,11 +66,12 @@ sudo cp ~/custom_netdata/erd-dd-netdata-monitoring/health_alarm_notify.conf /etc
 
 # Query if node type is Observer or Validator and cp the correct file
 # Declare variable nodetype and assign value 3
+echo -e "\nEstablishing node type (Observer / Validator) \n"
 nodetype=3
 # Print to stdout
- echo "1. Observer"
- echo "2. Validator"
- echo -n "Please choose node type [1 or 3] ?"
+echo "1. Observer"
+echo "2. Validator"
+echo -n "Please choose node type [1 or 3] ?"
 # Loop while the variable nodetype is equal 3
 # bash while loop
 while [ $nodetype -eq 3 ]; do
@@ -99,9 +98,7 @@ else
         fi
 fi
 done
-
+sudo systemctl stop netdata && cd /var/cache/netdata && sudo rm -rf *
 cd /usr/libexec/netdata/charts.d/ && sudo chmod +x elrond.chart.sh && sudo chmod 755 elrond.chart.sh
-
 sudo systemctl restart netdata
-
 echo "Netdata installation complete. Configuration & script files succesfuly installed."
