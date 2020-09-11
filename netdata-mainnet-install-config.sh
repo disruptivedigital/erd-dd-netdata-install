@@ -101,4 +101,5 @@ done
 sudo systemctl stop netdata && cd /var/cache/netdata && sudo rm -rf *
 cd /usr/libexec/netdata/charts.d/ && sudo chmod +x elrond.chart.sh && sudo chmod 755 elrond.chart.sh
 sudo systemctl restart netdata
+rm -rf ~/erd-dd-netdata-install ~/custom_netdata
 echo "Netdata installation complete. Configuration & script files succesfuly installed."
