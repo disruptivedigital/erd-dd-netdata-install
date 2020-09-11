@@ -71,7 +71,7 @@ nodetype=3
 # Print to stdout
 echo "1. Observer"
 echo "2. Validator"
-echo -n "Please choose node type [1 or 3] ? "
+echo -n "Please choose node type [1 or 3]? "
 # Loop while the variable nodetype is equal 3
 # bash while loop
 while [ $nodetype -eq 3 ]; do
