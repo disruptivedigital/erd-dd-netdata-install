@@ -3,9 +3,22 @@ powered by DisruptiveDigital 2020
 
 This script installs Netdata real-time, performance and health monitoring solution and automates all the necessary configurations to properly monitor your Elrond nodes.
 
+> Before starting, you should set up the telegram bot
+- in telegram access @BotFather 
+- enter this command: /newbot
+    - choose a name for your bot
+    - choose a username for your bot
+    - save your access token - you will need this later
+- create a new group where you want to receive Netdata alarms/notifications
+    - add your bot created in the previous step
+    - add @myidbot to this group
+    - enter this command: /getgroupid
+    - save your group ID - you will need this later
+
+
 > Git clone one script installer
 
-Don't run the script on root user.
+Note: Don't run the script on root user.
 
 > Make sure you have git installed, if not, run the following commands:
 sudo apt update
