@@ -132,11 +132,10 @@ rm -rf ~/erd-dd-netdata-install ~/custom_netdata
 # Testing telegram notifications
 echo -e "Do you want to test telegram notifications now? (Y/y) \c"
 read  tnotif
-if [ "$tnotif" = "Y" -o "$tnotif" = "y" ]; then
+if [ $tnotif = "Y" -o $tnotif = "y" ]; then
 	echo "You should receive some telegram alerts..."
-	sudo hostnamectl set-hostname $qhost
 else
 	echo "No telegram alert was sent."
 fi
-
+cd ~
 echo "Netdata installation complete. Configuration, script files and alerts succesfuly installed."
