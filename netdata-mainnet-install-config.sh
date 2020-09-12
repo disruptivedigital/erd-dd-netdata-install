@@ -36,6 +36,9 @@ sudo htpasswd -c /etc/nginx/.htpasswd $username
 echo "Confirming that the username-password pair has been created..."
 cat /etc/nginx/.htpasswd
 
+sudo nginx -t
+sudo systemctl reload nginx
+
 # bash check if directory exists
 echo "Refetching ddigital script & configuration files..."
 
@@ -120,6 +123,7 @@ else
         fi
 fi
 done
+
 sudo systemctl stop netdata && cd /var/cache/netdata && sudo rm -rf *
 cd /usr/libexec/netdata/charts.d/ && sudo chmod +x elrond.chart.sh && sudo chmod 755 elrond.chart.sh
 sudo systemctl restart netdata
