@@ -8,7 +8,7 @@ sudo apt-get update && sudo apt-get upgrade && sudo apt-get -y dist-upgrade
 sudo apt autoremove
 echo "Setting the hostname..."
 # declare HOSTNAME variable
-HOSTNAME=echo hostname
+HOSTNAME=$(hostname)
 echo -e "The current hostname for this machine is <$HOSTNAME>. Please input the new hostname or leave it blank if don't want to change it: \c"
 read  qhost
 
@@ -24,15 +24,16 @@ echo "Installing/updating Netdata (stable channel, disabled telemetry)..."
 bash <(curl -Ss https://my-netdata.io/kickstart.sh) --disable-telemetry --stable-channel
 
 # Apache nginx install
-# echo "Installing/updating nginx apache"
-# sudo apt install nginx apache2-utils
+echo "Installing/updating nginx apache"
+sudo apt install nginx apache2-utils
 
-# echo "Creating password for ddigi user for nginx apache..."
-# sudo htpasswd -c /etc/nginx/.htpasswd ddigi
+echo "Creating password for ddigi user for nginx apache..."
+echo -e "Please input the apache/nginx username: \c"
+read username
+sudo htpasswd -c /etc/nginx/.htpasswd $username
 
-# echo "Confirming that the username-password pair has been created..."
-# cat /etc/nginx/.htpasswd
-
+echo "Confirming that the username-password pair has been created..."
+cat /etc/nginx/.htpasswd
 
 # bash check if directory exists
 echo "Refetching ddigital script & configuration files..."
@@ -52,6 +53,12 @@ cd ~/custom_netdata && rm -rf erd-dd-netdata-monitoring
 # Cloning github files
 git clone https://github.com/disruptivedigital/erd-dd-netdata-monitoring.git
 
+# Assign the IP address to nginx.conf
+ip4=$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
+echo "Server IP address is <$ip4>."
+cd ~/custom_netdata/erd-dd-netdata-monitoring
+sed -i "s/my-ip-address/$ip4/" nginx.conf
+
 # Setting telegram bot token & recipient
 echo -e "Please input TELEGRAM BOT TOKEN (example: 1234567890:Aa1BbCc2DdEe3FfGg4HhIiJjKkLlMmNnOoP): \c"
 read  tbt
@@ -63,6 +70,8 @@ read  tdr
 cd ~/custom_netdata/erd-dd-netdata-monitoring
 sed -i "s/telegram-recipient-placeholder/$tdr/" health_alarm_notify.conf
 
+
+# Copy the chart & config files
 sudo cp ~/custom_netdata/erd-dd-netdata-monitoring/elrond.chart.sh /usr/libexec/netdata/charts.d/
 sudo cp ~/custom_netdata/erd-dd-netdata-monitoring/charts.d.conf /usr/libexec/netdata/charts.d/
 
@@ -73,6 +82,8 @@ sudo cp ~/custom_netdata/erd-dd-netdata-monitoring/tcp_resets.conf /etc/netdata/
 
 sudo cp ~/custom_netdata/erd-dd-netdata-monitoring/netdata.conf /etc/netdata/
 sudo cp ~/custom_netdata/erd-dd-netdata-monitoring/health_alarm_notify.conf /etc/netdata/
+
+sudo cp ~/custom_netdata/erd-dd-netdata-monitoring/nginx.conf /etc/nginx/
 
 # Query if node type is Observer or Validator and cp the correct file
 # Declare variable nodetype and assign value 3
