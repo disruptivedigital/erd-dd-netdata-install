@@ -134,6 +134,7 @@ echo -e "Do you want to test telegram notifications now? (Y/y) \c"
 read  tnotif
 if [ $tnotif = "Y" -o $tnotif = "y" ]; then
 	echo "You should receive some telegram alerts..."
+	/usr/libexec/netdata/plugins.d/alarm-notify.sh test
 else
 	echo "No telegram alert was sent."
 fi
