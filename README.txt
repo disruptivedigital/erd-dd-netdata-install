@@ -1,6 +1,8 @@
 Elrond real-time node performance and health monitoring
 powered by DisruptiveDigital 2020
 
+This script installs Netdata real-time, performance and health monitoring solution and automates all the necessary configurations to properly monitor your Elrond nodes.
+
 > Git clone one script installer
 
 Don't run the script on root user.
