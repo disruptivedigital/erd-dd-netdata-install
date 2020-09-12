@@ -6,8 +6,9 @@
 echo "Updating Linux..."
 sudo apt-get update && sudo apt-get upgrade && sudo apt-get -y dist-upgrade
 sudo apt autoremove
-echo "Setting the hostname..."
+
 # declare HOSTNAME variable
+echo "Setting the hostname..."
 HOSTNAME=$(hostname)
 echo -e "The current hostname for this machine is <$HOSTNAME>. Please input the new hostname or leave it blank if don't want to change it: \c"
 read  qhost
@@ -123,4 +124,15 @@ sudo systemctl stop netdata && cd /var/cache/netdata && sudo rm -rf *
 cd /usr/libexec/netdata/charts.d/ && sudo chmod +x elrond.chart.sh && sudo chmod 755 elrond.chart.sh
 sudo systemctl restart netdata
 rm -rf ~/erd-dd-netdata-install ~/custom_netdata
-echo "Netdata installation complete. Configuration & script files succesfuly installed."
+
+# Testing telegram notifications
+echo -e "Do you want to test telegram notifications now? (Y/y) \c"
+read  tnotif
+if [ "$tnotif" = "Y" -o "$tnotif" = "y" ]; then
+	echo "You should receive some telegram alerts..."
+	sudo hostnamectl set-hostname $qhost
+else
+	echo "No telegram alert was sent."
+fi
+
+echo "Netdata installation complete. Configuration, script files and alerts succesfuly installed."
