@@ -50,8 +50,18 @@ cd ~/custom_netdata && rm -rf erd-dd-netdata-monitoring
 
 
 # Cloning github files
-
 git clone https://github.com/disruptivedigital/erd-dd-netdata-monitoring.git
+
+# Setting telegram bot token & recipient
+echo -e "Please input TELEGRAM BOT TOKEN (example: 1234567890:Aa1BbCc2DdEe3FfGg4HhIiJjKkLlMmNnOoP): \c"
+read  tbt
+cd ~/custom_netdata/erd-dd-netdata-monitoring
+sed -i "s/telegram-token-placeholder/$tbt/" health_alarm_notify.conf
+
+echo -e "Please input TELEGRAM DEFAULT RECIPIENT (example: 123456789): \c"
+read  tdr
+cd ~/custom_netdata/erd-dd-netdata-monitoring
+sed -i "s/telegram-recipient-placeholder/$tdr/" health_alarm_notify.conf
 
 sudo cp ~/custom_netdata/erd-dd-netdata-monitoring/elrond.chart.sh /usr/libexec/netdata/charts.d/
 sudo cp ~/custom_netdata/erd-dd-netdata-monitoring/charts.d.conf /usr/libexec/netdata/charts.d/
