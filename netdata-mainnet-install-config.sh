@@ -1,12 +1,12 @@
 #!/bin/bash
 # Netdata install & config script - Elrond Nodes - ddigital nodes
 # powered by Disruptive Digital (c) 2020
-# v.1.2
+# v.1.3
 
 # Starting...
 echo "Updating Linux..."
-sudo apt-get update && sudo apt-get upgrade && sudo apt-get -y dist-upgrade
-sudo apt autoremove
+sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade
+sudo apt -y autoremove
 
 # declare HOSTNAME variable
 echo "Setting the hostname..."
@@ -27,7 +27,7 @@ bash <(curl -Ss https://my-netdata.io/kickstart.sh) --disable-telemetry --stable
 
 # Apache nginx install
 echo "Installing/updating nginx apache"
-sudo apt install nginx apache2-utils
+sudo apt install -y nginx apache2-utils
 
 echo "Creating password for ddigi user for nginx apache..."
 echo -e "Please input the apache/nginx username: \c"
@@ -58,7 +58,8 @@ cd ~/custom_netdata && rm -rf erd-dd-netdata-monitoring
 git clone https://github.com/disruptivedigital/erd-dd-netdata-monitoring.git
 
 # Assign the IP address to nginx.conf
-ip4=$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
+ip4=$(hostname -I)
+ip4=${ip4:0:-1}
 echo "Server IP address is <$ip4>."
 cd ~/custom_netdata/erd-dd-netdata-monitoring
 sed -i "s/my-ip-address/$ip4/" nginx.conf
