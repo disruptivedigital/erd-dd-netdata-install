@@ -1,6 +1,7 @@
 #!/bin/bash
 # Netdata install & config script - Elrond Nodes - ddigital nodes
 # powered by Disruptive Digital (c) 2020
+# v.1.2
 
 # Starting...
 echo "Updating Linux..."
