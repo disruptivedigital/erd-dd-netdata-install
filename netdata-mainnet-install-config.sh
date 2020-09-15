@@ -129,10 +129,15 @@ sudo systemctl restart netdata
 sudo systemctl reload nginx
 rm -rf ~/erd-dd-netdata-install ~/custom_netdata
 
+# Setting the firewall for Elrond nodes discovery
+echo "Configuring the firewall for nodes discovery. Opening ports range 37373:38383/tcp..."
+sudo ufw allow 37373:38383/tcp
+
 # Testing telegram notifications
-echo -e "Do you want to test telegram notifications now? (Y/y) \c"
+shopt -s nocasematch
+echo -e "Do you want to test telegram notifications now? (y|n) \c"
 read  tnotif
-if [ $tnotif = "Y" -o $tnotif = "y" ]; then
+if [[ $tnotif == "y" ]]; then
 	echo "You should receive some telegram alerts..."
 	/usr/libexec/netdata/plugins.d/alarm-notify.sh test
 else
