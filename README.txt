@@ -29,3 +29,18 @@ rm -rf erd-dd-netdata-install
 
 > Then git clone:
 cd ~ && git clone https://github.com/disruptivedigital/erd-dd-netdata-install.git && cd erd-dd-netdata-install && bash netdata-mainnet-install-config.sh
+
+
+
+Versions:
+1.0 
+- Linux update
+- Setting the hostname
+- Setting Netdata chart & config files
+- Setting telegram alerts & notifications
+
+1.1
+- Apache nginx install & configuration
+
+1.2
+- Setting the firewall for Elrond nodes discovery (ufw allow 37373:38383/tcp)
