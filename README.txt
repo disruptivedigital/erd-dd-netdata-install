@@ -34,6 +34,9 @@ cd ~ && git clone https://github.com/disruptivedigital/erd-dd-netdata-install.gi
 ----------------------------------------------------------------------
 Versions:
 
+v.1.4
+- automate the setup of ufw
+
 v.1.3
 - bypass yes/no prompts for linux update and apache nginx install
 - change command to get IP4 address
