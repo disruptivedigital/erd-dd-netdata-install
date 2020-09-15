@@ -31,16 +31,21 @@ rm -rf erd-dd-netdata-install
 cd ~ && git clone https://github.com/disruptivedigital/erd-dd-netdata-install.git && cd erd-dd-netdata-install && bash netdata-mainnet-install-config.sh
 
 
-
+----------------------------------------------------------------------
 Versions:
-1.0 
+
+v.1.3
+- bypass yes/no prompts for linux update and apache nginx install
+- change command to get IP4 address
+
+v.1.2
+- Setting the firewall for Elrond nodes discovery (ufw allow 37373:38383/tcp)
+
+v.1.1
+- Apache nginx install & configuration
+
+v.1.0 
 - Linux update
 - Setting the hostname
 - Setting Netdata chart & config files
 - Setting telegram alerts & notifications
-
-1.1
-- Apache nginx install & configuration
-
-1.2
-- Setting the firewall for Elrond nodes discovery (ufw allow 37373:38383/tcp)
