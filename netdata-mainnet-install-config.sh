@@ -1,7 +1,7 @@
 #!/bin/bash
 # Netdata install & config script - Elrond Nodes - ddigital nodes
 # powered by Disruptive Digital (c) 2020
-# v.1.3
+# v.1.4
 
 # Starting...
 echo "Updating Linux..."
@@ -132,8 +132,19 @@ sudo systemctl reload nginx
 rm -rf ~/erd-dd-netdata-install ~/custom_netdata
 
 # Setting the firewall for Elrond nodes discovery
-echo "Configuring the firewall for nodes discovery. Opening ports range 37373:38383/tcp..."
-sudo ufw allow 37373:38383/tcp
+shopt -s nocasematch
+echo -e "Do you want to configure and enable firewall for nodes discovery now? (y|n) \c"
+read  qufw
+if [[ $qufw == "y" ]]; then
+	echo "Opening ports range 37373:38383/tcp and activating ufw..."
+	sudo apt install -y ufw
+	sudo ufw allow 37373:38383/tcp
+	sudo ufw --force enable
+	sudo ufw status verbose
+else
+	echo "Firewall setup skipped."
+fi
+
 
 # Testing telegram notifications
 shopt -s nocasematch
