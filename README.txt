@@ -16,7 +16,7 @@ This script installs Netdata real-time, performance and health monitoring soluti
     - save your group ID - you will need this later
 
 
-> Git clone one script installer
+> Git clone one-line script installer
 
 Note: Don't run the script on root user.
 
