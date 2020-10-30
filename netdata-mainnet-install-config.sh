@@ -9,7 +9,7 @@ sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade
 sudo apt -y autoremove
 
 # declare HOSTNAME variable
-echo "Setting the hostname..."
+echo "Setting up the hostname. This is the name that appears in the Netdata dashboard in the Node Name heading."
 HOSTNAME=$(hostname)
 echo -e "The current hostname for this machine is <$HOSTNAME>. Please input the new hostname or leave it blank if don't want to change it: \c"
 read  qhost
@@ -139,6 +139,20 @@ if [[ $qufw == "y" ]]; then
 	echo "Opening ports range 37373:38383/tcp and activating ufw..."
 	sudo apt install -y ufw
 	sudo ufw allow 37373:38383/tcp
+	
+	# Open secret SSH port or standard (22) port
+	echo "Setting up the SSH port / other ports..."
+	echo -e "Please input your SSH port (range ports example 37:38) or leave it blank if don't want to change it: \c"
+	read  sshport
+
+		# bash check if change hostname
+		if [ -n "$sshport" ]; then
+			echo "Changing SSH port to $sshport"
+			sudo ufw allow $sshport/tcp
+		else
+			echo "SSH port remained unchanged."
+		fi
+	
 	sudo ufw --force enable
 	sudo ufw status verbose
 else
