@@ -119,7 +119,7 @@ else
                         echo "Please make a choice between 1-2 !"
                         echo "1. Observer"
                         echo "2. Validator"
-                        echo -n "Please choose node type [1 or 3] ?"
+                        echo -n "Please choose node type [1 or 2] ?"
                         nodetype=3
         fi
 fi
