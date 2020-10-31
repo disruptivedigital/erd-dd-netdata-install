@@ -33,6 +33,10 @@ cd ~ && git clone https://github.com/disruptivedigital/erd-dd-netdata-install.gi
 
 ----------------------------------------------------------------------
 Versions:
+v.1.7
+- Removed ufw activation
+- Added more explanatory input text
+- Code improvements
 
 v.1.6
 - Removed enabling ufw
