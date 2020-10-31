@@ -33,6 +33,12 @@ cd ~ && git clone https://github.com/disruptivedigital/erd-dd-netdata-install.gi
 
 ----------------------------------------------------------------------
 Versions:
+
+v.1.6
+- Removed enabling ufw
+- Added more explanatory text
+- Other various improvements
+
 v.1.5
 - Added the possibility to set up the SSH port or other port or range ports
 
