@@ -5,6 +5,7 @@
 
 # Starting...
 echo "Updating Linux..."
+sudo chown -R $USER home
 sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade
 sudo apt -y autoremove
 
