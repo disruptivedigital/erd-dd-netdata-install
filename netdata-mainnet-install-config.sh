@@ -1,7 +1,7 @@
 #!/bin/bash
 # Netdata install & config script - Elrond Nodes - ddigital nodes
 # powered by Disruptive Digital (c) 2020
-# v.1.5
+# v.1.6
 
 # Starting...
 echo "Updating Linux..."
@@ -23,13 +23,13 @@ else
 fi
 
 echo "Installing/updating Netdata (stable channel, disabled telemetry)..."
-bash <(curl -Ss https://my-netdata.io/kickstart.sh) --disable-telemetry --stable-channel
+bash <(curl -Ss https://my-netdata.io/kickstart.sh) --stable-channel --disable-telemetry
 
 # Apache nginx install
 echo "Installing/updating nginx apache"
 sudo apt install -y nginx apache2-utils
 
-echo "Creating password for ddigi user for nginx apache..."
+echo "In order to access your Netdata dashboard, you need to create an username and a password for nginx apache..."
 echo -e "Please input the apache/nginx username: \c"
 read username
 sudo htpasswd -c /etc/nginx/.htpasswd $username
@@ -37,10 +37,11 @@ sudo htpasswd -c /etc/nginx/.htpasswd $username
 echo "Confirming that the username-password pair has been created..."
 cat /etc/nginx/.htpasswd
 
+echo "Verifying the nginx configuration to check if everything is ok..."
 sudo nginx -t
 
 # bash check if directory exists
-echo "Refetching ddigital script & configuration files..."
+echo "Downloading Disruptive Digital script & configuration files..."
 
 directory="/home/ubuntu/custom_netdata/"
 
@@ -97,7 +98,7 @@ nodetype=3
 # Print to stdout
 echo "1. Observer"
 echo "2. Validator"
-echo -n "Please choose node type [1 or 3]? "
+echo -n "Please choose node type [1 or 2]? "
 # Loop while the variable nodetype is equal 3
 # bash while loop
 while [ $nodetype -eq 3 ]; do
@@ -133,7 +134,7 @@ rm -rf ~/erd-dd-netdata-install ~/custom_netdata
 
 # Setting the firewall for Elrond nodes discovery
 shopt -s nocasematch
-echo -e "Do you want to configure and enable firewall for nodes discovery now? (y|n) \c"
+echo -e "Do you want to configure firewall for nodes discovery now? (y|n) \c"
 read  qufw
 if [[ $qufw == "y" ]]; then
 	echo "Opening ports range 37373:38383/tcp and activating ufw..."
@@ -153,7 +154,7 @@ if [[ $qufw == "y" ]]; then
 			echo "SSH port remained unchanged."
 		fi
 	
-	sudo ufw --force enable
+	#sudo ufw --force enable
 	sudo ufw status verbose
 else
 	echo "Firewall setup skipped."
@@ -171,4 +172,5 @@ else
 	echo "No telegram alert was sent."
 fi
 cd ~
+echo "Netdata monitoring: IP address: $ip4 | Username: $username | Password: not-displayed-here"
 echo "Netdata installation complete. Configuration, script files and alerts succesfuly installed."
