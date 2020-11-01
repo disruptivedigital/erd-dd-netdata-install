@@ -1,13 +1,13 @@
 #!/bin/bash
 # Netdata install & config script - Elrond Nodes - ddigital nodes
 # powered by Disruptive Digital (c) 2020
-# v.1.6
+# v.1.7
 
 # Starting...
 echo "Updating Linux..."
 sudo chown -R $USER home
 sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade
-sudo apt -y autoremove
+sudo apt -y autoremove && sudo apt-get -y autoclean
 
 # declare HOSTNAME variable
 echo "Setting up the hostname. This is the name that appears in the Netdata dashboard in the Node Name heading."
