@@ -1,7 +1,7 @@
 #!/bin/bash
 # Netdata install & config script - Elrond Nodes - ddigital nodes
 # powered by Disruptive Digital (c) 2020
-# v.1.7
+# v.1.8
 
 # Starting...
 echo "Updating Linux..."
@@ -173,5 +173,6 @@ else
 	echo "No telegram alert was sent."
 fi
 cd ~
-echo "Netdata monitoring: IP address: $ip4 | Username: $username | Password: not-displayed-here"
-echo "Netdata installation complete. Configuration, script files and alerts succesfuly installed."
+myextip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
+echo "\nNetdata monitoring: \nIP address: ${myextip} | Username: $username | Password: not-displayed-here"
+echo "\nNetdata installation complete. Configuration, script files and alerts succesfuly installed."
