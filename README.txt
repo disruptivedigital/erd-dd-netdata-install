@@ -33,6 +33,8 @@ cd ~ && git clone https://github.com/disruptivedigital/erd-dd-netdata-install.gi
 
 ----------------------------------------------------------------------
 Versions:
+v.1.9
+-Some code polish
 
 v.1.8
 - Get public IP address and display it at Netdata configuration information. 
