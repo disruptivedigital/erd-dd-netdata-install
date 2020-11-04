@@ -12,7 +12,7 @@ sudo apt -y autoremove && sudo apt-get -y autoclean
 # declare HOSTNAME variable
 printf "\nSetting up the hostname. This is the name that appears in the Netdata dashboard in the Node Name heading."
 HOSTNAME=$(hostname)
-printf "The current hostname for this machine is <$HOSTNAME>. Please input the new hostname or leave it blank if don't want to change it: \c"
+printf "The current hostname for this machine is <$HOSTNAME>. Please input the new hostname or leave it blank if don't want to change it: "
 read  qhost
 
 # bash check if change hostname
@@ -31,7 +31,7 @@ printf "Installing/updating nginx apache"
 sudo apt install -y nginx apache2-utils
 
 printf "\nIn order to access your Netdata dashboard, you need to create an username and a password for nginx apache..."
-printf "Please input the apache/nginx username: \c"
+printf "Please input the apache/nginx username: "
 read username
 sudo htpasswd -c /etc/nginx/.htpasswd $username
 
@@ -67,12 +67,12 @@ cd ~/custom_netdata/erd-dd-netdata-monitoring
 sed -i "s/my-ip-address/$ip4/" nginx.conf
 
 # Setting telegram bot token & recipient
-printf "\nPlease input TELEGRAM BOT TOKEN (example: 1234567890:Aa1BbCc2DdEe3FfGg4HhIiJjKkLlMmNnOoP): \c"
+printf "\nPlease input TELEGRAM BOT TOKEN (example: 1234567890:Aa1BbCc2DdEe3FfGg4HhIiJjKkLlMmNnOoP): "
 read  tbt
 cd ~/custom_netdata/erd-dd-netdata-monitoring
 sed -i "s/telegram-token-placeholder/$tbt/" health_alarm_notify.conf
 
-printf "\nPlease input TELEGRAM DEFAULT RECIPIENT (example: 123456789): \c"
+printf "\nPlease input TELEGRAM DEFAULT RECIPIENT (example: 123456789): "
 read  tdr
 cd ~/custom_netdata/erd-dd-netdata-monitoring
 sed -i "s/telegram-recipient-placeholder/$tdr/" health_alarm_notify.conf
@@ -135,7 +135,7 @@ rm -rf ~/erd-dd-netdata-install ~/custom_netdata
 
 # Setting the firewall for Elrond nodes discovery
 shopt -s nocasematch
-printf "\nDo you want to configure firewall for nodes discovery now? (y|n) \c"
+printf "\nDo you want to configure firewall for nodes discovery now? (y|n) "
 read  qufw
 if [[ $qufw == "y" ]]; then
 	printf "Opening ports range 37373:38383/tcp and activating ufw..."
@@ -144,7 +144,7 @@ if [[ $qufw == "y" ]]; then
 	
 	# Open secret SSH port or standard (22) port
 	printf "Setting up the SSH port / other ports..."
-	printf "Please input your SSH port (range ports example 37:38) or leave it blank if don't want to change it: \c"
+	printf "Please input your SSH port (range ports example 37:38) or leave it blank if don't want to change it: "
 	read  sshport
 
 		# bash check if change hostname
@@ -164,7 +164,7 @@ fi
 
 # Testing telegram notifications
 shopt -s nocasematch
-printf "\nDo you want to test telegram notifications now? (y|n) \c"
+printf "\nDo you want to test telegram notifications now? (y|n) "
 read  tnotif
 if [[ $tnotif == "y" ]]; then
 	printf "You should receive some telegram alerts..."
