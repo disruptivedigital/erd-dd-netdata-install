@@ -18,7 +18,7 @@ This script installs Netdata real-time, performance and health monitoring soluti
 
 > Git clone one-line script installer
 
-Note: Don't run the script on root user.
+Note: Don't run the script as root.
 
 > Make sure you have git installed, if not, run the following commands:
 sudo apt update
