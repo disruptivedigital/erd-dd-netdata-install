@@ -66,6 +66,11 @@ sudo systemctl restart netdata
 
 ----------------------------------------------------------------------
 Versions:
+
+v.1.10
+- ufw opens port 80
+- get IPv4 using a more reliable command
+
 v.1.9
 -Some code polish
 
