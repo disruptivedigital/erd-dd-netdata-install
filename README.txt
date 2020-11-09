@@ -10,8 +10,8 @@ This script installs Netdata real-time, performance and health monitoring soluti
     - choose a username for your bot
     - save your access token - you will need this later
 - create a new group where you want to receive Netdata alarms/notifications
-    - add your bot created in the previous step
-    - add @myidbot to this group
+    - invite your bot created in the previous step
+    - invite a second bot @myidbot to this group
     - enter this command: /getgroupid
     - save your group ID - you will need this later
 
